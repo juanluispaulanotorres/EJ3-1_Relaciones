@@ -1,5 +1,6 @@
 package com.example.EJ2DTOCrud.content.asignacion.application;
 
+import com.example.EJ2DTOCrud.CustomError;
 import com.example.EJ2DTOCrud.content.asignacion.infraestructure.db.springdata.dbo.Persona;
 import com.example.EJ2DTOCrud.content.asignacion.application.port.iPersona;
 import com.example.EJ2DTOCrud.content.asignacion.infraestructure.controller.dto.input.PersonaInputDTO;
@@ -42,8 +43,9 @@ public class PersonaService implements iPersona {
     }
 
     @Override
-    public PersonaOutputDTO idPersona(int id) throws Exception {
-        Persona persona = personaRepositoryJpa.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "No se ha encontrado a la persona solicitada"));
+    public PersonaOutputDTO idPersona(int id) throws CustomError {
+        Persona persona = personaRepositoryJpa.findById(id).orElseThrow(()-> new CustomError(HttpStatus.NOT_FOUND.value(), "No se ha encontrado el id solicitado"));
+
         PersonaOutputDTO personaOutputDTO = new PersonaOutputDTO(persona);
         return personaOutputDTO;
     }
@@ -64,13 +66,22 @@ public class PersonaService implements iPersona {
     }
 
     @Override
-    public void modificaPersona(int id, PersonaInputDTO personaInputDTO) {
+    public void modificaPersona(int id, PersonaInputDTO personaInputDTO) throws CustomError {
         // Recuperar la lista de las personas y recorrerla con un bucle para encontrar la solicitada y modificarla
+
+        try {
+            personaRepositoryJpa.findById(id).orElseThrow(()-> new CustomError(HttpStatus.NOT_FOUND.value(), "No se ha encontrado el id solicitado"));
+
+        } catch (CustomError e) {
+            throw new CustomError(HttpStatus.NOT_FOUND.value(), "No se ha encontrado el id solicitado");
+        }
+
         List<PersonaOutputDTO> lista = this.listaPersonas();
 
         for (int i = 0; i < lista.size(); i++) {
             PersonaOutputDTO p;
             p = lista.get(i);
+
             if (p.getId_persona() == id) {
                 Persona persona = new Persona(personaInputDTO);
                 // IMPORTANTE: Hay que establecer el nuevo "id" de la persona usando el que pasamos como parámetro
@@ -82,11 +93,8 @@ public class PersonaService implements iPersona {
     }
 
     @Override
-    public void eliminaPersona(int id) throws Exception {
-        try {
-            personaRepositoryJpa.deleteById(id);
-        } catch (Exception e) {
-            throw new Exception("La persona que busca no se encuentra en la base de datos");
-        }
+    public void eliminaPersona(int id) throws CustomError{
+        Persona persona = personaRepositoryJpa.findById(id).orElseThrow(()-> new CustomError(HttpStatus.NOT_FOUND.value(), "No se ha encontrado el id solicitado"));
+        personaRepositoryJpa.delete(persona);
     }
 }

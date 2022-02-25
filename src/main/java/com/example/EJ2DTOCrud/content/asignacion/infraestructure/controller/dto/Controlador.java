@@ -1,5 +1,6 @@
 package com.example.EJ2DTOCrud.content.asignacion.infraestructure.controller.dto;
 
+import com.example.EJ2DTOCrud.CustomError;
 import com.example.EJ2DTOCrud.content.asignacion.application.PersonaService;
 import com.example.EJ2DTOCrud.content.asignacion.infraestructure.controller.dto.input.PersonaInputDTO;
 import com.example.EJ2DTOCrud.content.asignacion.infraestructure.controller.dto.output.PersonaOutputDTO;
@@ -25,7 +26,7 @@ public class Controlador {
 
     // Mostrar persona por "id"
     @GetMapping("/persona/{id}")
-    public PersonaOutputDTO idPersona(@PathVariable int id) throws Exception{
+    public PersonaOutputDTO idPersona(@PathVariable int id) throws CustomError{
         return personaService.idPersona(id);
     }
 
@@ -37,12 +38,12 @@ public class Controlador {
 
     // Modificar usuario
     @PutMapping("/modificar/{id}")
-    public void modificaPersona(@PathVariable int id, @RequestBody PersonaInputDTO persona) {
+    public void modificaPersona(@PathVariable int id, @RequestBody PersonaInputDTO persona) throws CustomError {
         personaService.modificaPersona(id, persona);
     }
 
     @DeleteMapping("/eliminar/{id}")
-    public String eliminaPersona(@PathVariable int id) throws Exception {
+    public String eliminaPersona(@PathVariable int id) throws CustomError{
         personaService.eliminaPersona(id);
         return "Persona eliminada de la base de datos";
     }
