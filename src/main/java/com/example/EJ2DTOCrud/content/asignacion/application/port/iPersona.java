@@ -4,7 +4,6 @@ import com.example.EJ2DTOCrud.CustomError;
 import com.example.EJ2DTOCrud.content.asignacion.infraestructure.controller.dto.input.PersonaInputDTO;
 import com.example.EJ2DTOCrud.content.asignacion.infraestructure.controller.dto.output.PersonaOutputDTO;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 

@@ -2,7 +2,6 @@ package com.example.EJ2DTOCrud.content.asignacion.infraestructure.controller.dto
 
 import com.example.EJ2DTOCrud.content.asignacion.infraestructure.db.springdata.dbo.Persona;
 import lombok.Data;
-
 import java.io.Serializable;
 import java.util.Date;
 

@@ -1,7 +1,6 @@
 package com.example.EJ2DTOCrud;
 
 import lombok.Data;
-
 import java.sql.Timestamp;
 import java.util.Date;
 

@@ -1,7 +1,6 @@
 package com.example.EJ2DTOCrud.content.asignacion.infraestructure.controller.dto.input;
 
 import lombok.Data;
-
 import java.io.Serializable;
 import java.util.Date;
 
