@@ -1,5 +1,6 @@
 package com.example.EJ2DTOCrud.content.asignacion.infraestructure.controller.dto.input;
 
+import com.example.EJ2DTOCrud.content.asignacion.infraestructure.db.springdata.dbo.Estudiante;
 import lombok.Data;
 import java.io.Serializable;
 import java.util.Date;
@@ -18,6 +19,7 @@ public class PersonaInputDTO implements Serializable {
     private Date created_date;
     private String imagen_url;
     private Date termination_date;
+    //private Estudiante estudiate;
 }
 
 

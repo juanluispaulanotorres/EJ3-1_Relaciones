@@ -24,6 +24,7 @@ public class PersonaService implements iPersona {
 
         } else if (personaInputDTO.getUsuario().length() > 10) {
             throw new CustomError(HttpStatus.UNPROCESSABLE_ENTITY.value(), "El usuario no puede tener más de 10 caracteres");
+
         } else {
             Persona persona = new Persona(personaInputDTO);
             personaRepositoryJpa.save(persona);

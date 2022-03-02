@@ -43,6 +43,10 @@ public class Persona {
     private String imagen_url;
     @Column(name = "termination_date")
     private Date termination_date;
+    /*@OneToOne(mappedBy = "persona", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private Estudiante estudiante;
+    @OneToOne(mappedBy = "persona", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private Profesor profesor;*/
 
     public Persona() {
 
@@ -64,5 +68,6 @@ public class Persona {
         setCreated_date(personaDTO.getCreated_date());
         setImagen_url(personaDTO.getImagen_url());
         setTermination_date(personaDTO.getTermination_date());
+        //setEstudiante(personaDTO.getEstudiate());
     }
 }
