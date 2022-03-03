@@ -3,7 +3,7 @@ package com.example.EJ2DTOCrud.content.asignacion.infraestructure.controller.dto
 import com.example.EJ2DTOCrud.CustomError;
 import com.example.EJ2DTOCrud.content.asignacion.application.EstudianteService;
 import com.example.EJ2DTOCrud.content.asignacion.infraestructure.controller.dto.input.EstudianteInputDTO;
-import com.example.EJ2DTOCrud.content.asignacion.infraestructure.controller.dto.output.EstudianteOutputDTO;
+import com.example.EJ2DTOCrud.content.asignacion.infraestructure.controller.dto.output.Estudiante.EstudianteOutputDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -25,8 +25,8 @@ public class ControladorEstudiante {
 
     // Mostrar persona por "id"
     @GetMapping("/estudiante/{id}")
-    public EstudianteOutputDTO idEstudiante(@PathVariable String id) throws Exception {
-        return estudianteService.idEstudiante(id);
+    public EstudianteOutputDTO idEstudiante(@PathVariable String id, @RequestParam(name = "outputType", defaultValue = "simple") String outputType) throws Exception {
+        return estudianteService.idEstudiante(id, outputType);
     }
 
     // Modificar usuario

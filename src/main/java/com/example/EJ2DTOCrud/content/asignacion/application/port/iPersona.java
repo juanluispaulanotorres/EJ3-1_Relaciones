@@ -2,7 +2,7 @@ package com.example.EJ2DTOCrud.content.asignacion.application.port;
 
 import com.example.EJ2DTOCrud.CustomError;
 import com.example.EJ2DTOCrud.content.asignacion.infraestructure.controller.dto.input.PersonaInputDTO;
-import com.example.EJ2DTOCrud.content.asignacion.infraestructure.controller.dto.output.PersonaOutputDTO;
+import com.example.EJ2DTOCrud.content.asignacion.infraestructure.controller.dto.output.Persona.PersonaOutputDTO;
 import org.springframework.web.bind.annotation.PathVariable;
 import java.util.List;
 

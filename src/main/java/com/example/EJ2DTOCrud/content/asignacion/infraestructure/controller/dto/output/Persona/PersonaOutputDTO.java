@@ -1,4 +1,4 @@
-package com.example.EJ2DTOCrud.content.asignacion.infraestructure.controller.dto.output;
+package com.example.EJ2DTOCrud.content.asignacion.infraestructure.controller.dto.output.Persona;
 
 import com.example.EJ2DTOCrud.content.asignacion.infraestructure.db.springdata.dbo.Estudiante;
 import com.example.EJ2DTOCrud.content.asignacion.infraestructure.db.springdata.dbo.Persona;
@@ -8,7 +8,7 @@ import java.util.Date;
 
 @Data
 public class PersonaOutputDTO implements Serializable {
-    private int id_persona;
+    private String id_persona;
     private String usuario;
     private String password;
     private String name;
@@ -23,7 +23,7 @@ public class PersonaOutputDTO implements Serializable {
     private Estudiante estudiante;
 
     public PersonaOutputDTO(Persona persona) {
-        setId_persona(persona.getId_persona());
+        setId_persona(persona.getIdPersona());
         setUsuario(persona.getUsuario());
         setPassword(persona.getPassword());
         setName(persona.getName());
@@ -35,6 +35,6 @@ public class PersonaOutputDTO implements Serializable {
         setCreated_date(persona.getCreated_date());
         setImagen_url(persona.getImagen_url());
         setTermination_date(persona.getTermination_date());
-        //setEstudiante(persona.getEstudiante());
+        setEstudiante(persona.getEstudiante());
     }
 }

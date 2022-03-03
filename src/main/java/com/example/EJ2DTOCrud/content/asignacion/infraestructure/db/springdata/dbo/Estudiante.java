@@ -13,7 +13,6 @@ import javax.persistence.*;
 @Table(name = "Estudiantes")
 public class Estudiante {
     @Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "idEstudiante")
     @GenericGenerator(
             name = "idEstudiante",
@@ -24,33 +23,36 @@ public class Estudiante {
                     @Parameter(name = StringPrefixedSequenceIdGenerator.NUMBER_FORMAT_PARAMETER, value = "%01d")
             }
     )
+
     @Column(name = "id")
     private String id;
-    // NOTA: El "id" de la tabla persona es "int".       A TENER EN CUENTA
-/*
-    @JoinColumn(name = "persona_id")
-    @OneToOne(fetch = FetchType.LAZY)
-    private Persona persona;
-*/
+
     @Column(name = "num_horas")
     @NonNull
     private int num_hours_week;
+
     @Column(name = "coments")
     private String coments;
-    /*@OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_profesor")
-    private Profesor profesor;*/
+
     @Column(name = "branch")
     @NonNull
     private String branch;
-    /*@ManyToMany
+
+    @JoinColumn(name = "idPersona")
+    @OneToOne(fetch = FetchType.LAZY)
+    private Persona persona;
+
+    /*@OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_profesor")
+    private Profesor profesor;
+
+    @ManyToMany
     List<Estudiante_asignatura> estudios;*/
 
     public Estudiante(){}
 
     public Estudiante (EstudianteInputDTO estudianteInputDTO) {
-        setId(estudianteInputDTO.getId());
-        //setPersona(estudianteInputDTO.getPersona());
+        //setPersona(estudianteInputDTO.getIdPersona());
         setNum_hours_week(estudianteInputDTO.getNum_hours_week());
         setComents(estudianteInputDTO.getComents());
         //setProfesor(estudianteInputDTO.getProfesor());

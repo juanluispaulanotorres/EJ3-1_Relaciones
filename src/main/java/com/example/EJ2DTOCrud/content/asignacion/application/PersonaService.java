@@ -4,7 +4,7 @@ import com.example.EJ2DTOCrud.CustomError;
 import com.example.EJ2DTOCrud.content.asignacion.infraestructure.db.springdata.dbo.Persona;
 import com.example.EJ2DTOCrud.content.asignacion.application.port.iPersona;
 import com.example.EJ2DTOCrud.content.asignacion.infraestructure.controller.dto.input.PersonaInputDTO;
-import com.example.EJ2DTOCrud.content.asignacion.infraestructure.controller.dto.output.PersonaOutputDTO;
+import com.example.EJ2DTOCrud.content.asignacion.infraestructure.controller.dto.output.Persona.PersonaOutputDTO;
 import com.example.EJ2DTOCrud.content.asignacion.infraestructure.repository.jpa.PersonaRepositoryJpa;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -43,7 +43,7 @@ public class PersonaService implements iPersona {
 
     @Override
     public PersonaOutputDTO idPersona(int id) throws CustomError {
-        Persona persona = personaRepositoryJpa.findById(id).orElseThrow(()-> new CustomError(HttpStatus.NOT_FOUND.value(), "No se ha encontrado el id solicitado"));
+        Persona persona = personaRepositoryJpa.findById(String.valueOf(id)).orElseThrow(()-> new CustomError(HttpStatus.NOT_FOUND.value(), "No se ha encontrado el id solicitado"));
 
         PersonaOutputDTO personaOutputDTO = new PersonaOutputDTO(persona);
         return personaOutputDTO;
@@ -68,7 +68,7 @@ public class PersonaService implements iPersona {
     public void modificaPersona(int id, PersonaInputDTO personaInputDTO) throws CustomError {
 
         // En caso de no encontrar el "id", se lanza una excepción
-        personaRepositoryJpa.findById(id).orElseThrow(()-> new CustomError(HttpStatus.NOT_FOUND.value(), "No se ha encontrado el id solicitado"));
+        personaRepositoryJpa.findById(String.valueOf(id)).orElseThrow(()-> new CustomError(HttpStatus.NOT_FOUND.value(), "No se ha encontrado el id solicitado"));
 
         // En caso de que el "usuario" no sea válido, se lanzará las siguientes excepciones
         if (personaInputDTO.getUsuario() == null)
@@ -83,10 +83,10 @@ public class PersonaService implements iPersona {
             PersonaOutputDTO p;
             p = lista.get(i);
 
-            if (p.getId_persona() == id) {
+            if (String.valueOf(p.getId_persona()).equals(id)) {
                 Persona persona = new Persona(personaInputDTO);
                 // IMPORTANTE: Hay que establecer el nuevo "id" de la persona usando el que pasamos como parámetro
-                persona.setId_persona(id);
+                persona.setIdPersona(String.valueOf(id));
 
                 personaRepositoryJpa.save(persona);
             }
@@ -95,7 +95,7 @@ public class PersonaService implements iPersona {
 
     @Override
     public void eliminaPersona(int id) throws CustomError{
-        Persona persona = personaRepositoryJpa.findById(id).orElseThrow(()-> new CustomError(HttpStatus.NOT_FOUND.value(), "No se ha encontrado el id solicitado"));
+        Persona persona = personaRepositoryJpa.findById(String.valueOf(id)).orElseThrow(()-> new CustomError(HttpStatus.NOT_FOUND.value(), "No se ha encontrado el id solicitado"));
         personaRepositoryJpa.delete(persona);
     }
 }
